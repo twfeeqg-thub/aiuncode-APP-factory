@@ -1,42 +1,15 @@
 {
-    "name": "Flutter Dev Environment",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-    "features": {
-        "ghcr.io/devcontainers/features/common-utils:2": {
-            "installZsh": "true",
-            "installOhMyZsh": "true",
-            "upgradePackages": "true"
-        },
-        "ghcr.io/devcontainers/features/java:1": {
-            "version": "17"
-        },
-        "ghcr.io/devcontainers/features/android-sdk:1": {
-            "version": "34",
-            "buildToolsVersion": "34.0.0",
-            "platformVersion": "34"
-        }
-    },
-    "postCreateCommand": "git clone https://github.com/flutter/flutter.git -b stable /workspaces/flutter && echo 'export PATH=\"$PATH:/workspaces/flutter/bin\"' >> ~/.bashrc && echo 'export PATH=\"$PATH:/workspaces/flutter/bin\"' >> ~/.zshrc && flutter precache && flutter config --enable-web",
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash"
-            },
-            "extensions": [
-                "Dart-Code.flutter",
-                "Dart-Code.dart-code",
-                "GitHub.copilot",
-                "ms-vscode.vscode-github-actions"
-            ]
-        }
-    },
-    "forwardPorts": [
-        8080
-    ],
-    "portsAttributes": {
-        "8080": {
-            "label": "Flutter Web App",
-            "onAutoForward": "openBrowser"
-        }
+  "name": "Flutter Development Environment",
+  "image": "ghcr.io/cirrus-actions/flutter:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "github.copilot"
+      ]
     }
+  },
+  "forwardPorts": [9100],
+  "postCreateCommand": "flutter precache && flutter doctor"
 }
